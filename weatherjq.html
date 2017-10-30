@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<style type="text/css">
+		#content > div  {
+			float: left;
+			width : 300px;
+			height : 150px;
+			border-radius: 30px;
+			background-color: lightblue;
+			padding : 20px;
+			margin-left: 20px;
+		}
+
+		#content > div img {
+			margin : 5px;
+			width : 50px;
+			height : 50px;
+			}
+
+	</style>
+</head>
+<body>
+	<div id="control">
+		<input type="text" id="itext"/>
+		<button id="bsearch">Search</button>
+		<button id="bclear">Clear</button>
+	</div>
+	<div id="content">
+		
+	</div>
+
+</body>
+<script type="text/javascript" src="jquery/jquery-3.2.1.js"></script>
+<script type="text/javascript">
+	// fa454439b36b644d49e751a9b0afbcfc
+
+
+	$("#bclear").click(function () {
+		$("#content").html("");
+	})
+
+	$("#bsearch").click(function () {
+		$.ajax({
+			url : "https://api.openweathermap.org/data/2.5/weather",
+			method : "GET",
+			dataType : "json",
+			data : {
+				"appid" : "fa454439b36b644d49e751a9b0afbcfc",
+				"units" : "metric",
+				"q" : $("#itext").val()
+			},
+			success : function (responsedata) {
+					console.log(responsedata);
+					$("#content")
+							.append($("<div/>")
+									.append($("<h1/>")
+										.html(responsedata.name)
+										)
+									.append($("<h2/>")
+										.html(responsedata.main.temp)
+										.append($("<img/>")
+											.attr("src", "http://openweathermap.org/img/w/"+responsedata.weather[0].icon+".png")))
+							);
+			}
+		})
+	})
+
+
+
+	//bclear = document.getElementById("bclear");
+	//bsearch = document.getElementById("bsearch");
+	//itext = document.getElementById("itext");
+	//divcontent = document.getElementById("content");
+
+	// add event handler search button
+
+	//bsearch.addEventListener("click", function () {
+		//newp = document.createElement("p");
+		//newp.innerHTML = itext.value;
+		//divcontent.appendChild(newp);
+
+		//api.openweathermap.org/data/2.5/weather?
+		//q=London&
+		//units=metric&
+		//APPID=fa454439b36b644d49e751a9b0afbcfc		
+
+		//base_url = "https://api.openweathermap.org/data/2.5/weather?";
+
+		//q = "q=" +  itext.value;
+		//appid= "APPID=fa454439b36b644d49e751a9b0afbcfc";
+		//units = "units=metric";
+
+		//format = "format=json";
+		//nojsoncallback = "nojsoncallback=1"
+		//text = "text=" + itext.value;
+		//per_page = "per_page=20";
+		//extras = "extras=url_q";
+
+		//call_url =  base_url + 
+		//			q   + "&" +
+		//			appid  + "&" +
+		//			units ;
+
+		//console.log(call_url);
+
+		// new request
+		//request = new XMLHttpRequest();
+
+		// init the request
+		//request.open("GET", call_url);
+
+		// register the handler
+
+		/*
+		request.onreadystatechange = function () {
+			//console.log(request.readyState);
+			if (request.readyState == 4 && request.status == 200) {
+				weatherJS = JSON.parse(request.responseText);
+
+				newdiv = document.createElement("div");
+				newh1 = document.createElement("h1");
+				newh2 = document.createElement("h2");
+				newimg = document.createElement("img");
+
+				// location
+				newh1.innerHTML = weatherJS.name;
+				// current temp
+				newh2.innerHTML = weatherJS.main.temp + "Cº";
+				newimg.setAttribute("src", "http://openweathermap.org/img/w/"+weatherJS.weather[0].icon+".png");
+
+				newdiv.appendChild(newh1);
+				newh2.appendChild(newimg);
+				newdiv.appendChild(newh2);
+
+				divcontent.appendChild(newdiv);
+
+
+				//for(i=0; i<photosJS.photos.photo.length; i++) {
+				//	newimg = document.createElement("img");
+				//	newimg.setAttribute("src",photosJS.photos.photo[i].url_q);
+				//	divcontent.appendChild(newimg);
+				//}
+				console.log(weatherJS);
+			}
+		}
+
+		// make the request
+		request.send();
+
+ 
+	})
+
+	// add event handler clear button
+
+	//bclear.addEventListener("click", function () {
+	//	divcontent.innerHTML = "";
+	//})
+	*/
+
+
+</script>
+</html>
